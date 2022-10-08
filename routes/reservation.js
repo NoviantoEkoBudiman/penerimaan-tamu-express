@@ -5,6 +5,10 @@ const v = new Validator();
 const { Reservation } = require('../models');
 
 router.get('/', async(req, res)=>{
+    res.render("../public/reservation/index");
+});
+
+router.get('/get_data', async(req, res)=>{
     const data = await Reservation.findAll();
     res.send(data);
 });
