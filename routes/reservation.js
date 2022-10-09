@@ -4,8 +4,32 @@ const Validator = require('fastest-validator');
 const v = new Validator();
 const { Reservation } = require('../models');
 
-router.get('/', async(req, res)=>{
-    res.render("../public/reservation/index");
+router.get("/", async(req, res)=>{
+    const page = 'reservation';
+    res.render('../public/reservation/index',{
+        page: page
+    });
+});
+
+router.get("/reservation", async(req, res)=>{
+    const page = 'reservation';
+    res.render('../public/reservation/index',{
+        page: page
+    });
+});
+
+router.get('/list_menu', async(req, res)=>{
+    const page = 'reservation';
+    res.render("../public/reservation/list_menu",{
+        page: page
+    });
+});
+
+router.get('/procedures', async(req, res)=>{
+    const page= 'reservation';
+    res.render('../public/reservation/procedures', {
+        page: page
+    });
 });
 
 router.get('/get_data', async(req, res)=>{
@@ -25,6 +49,7 @@ router.get('/edit/:id', async(req, res)=>{
 });
 
 router.post('/create', async(req, res)=>{    
+    res.send(typeof req.body.reservation_contact_number);
     const schema={
         reservation_goverment_service: "string|max:55",
         reservation_contact_number: "number|integer",

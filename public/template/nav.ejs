@@ -1,15 +1,14 @@
-
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 backdrop" data-navbar-on-scroll="data-navbar-on-scroll">
-    <div class="container"><a class="navbar-brand d-flex align-items-center fw-semi-bold fs-3" href="#"> <img class="me-3" src="assets/img/gallery/logo.png" alt="" />
+    <div class="container"><a class="navbar-brand d-flex align-items-center fw-semi-bold fs-3" href="#"> <img class="me-3" src="<%= (page != 'beranda') ? '../' : null %>assets/img/gallery/logo.png" alt="" />
         <div class="text-primary font-base">Sevi</div>
             </a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-                <li class="nav-item"><a class="nav-link  <%= (page == 'beranda') ? 'fw-medium active' : null  %>" aria-current="page" href="#">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link  <%= (page == 'reservasi') ? 'fw-medium active' : null  %>" href="reservation">Reservasi</a></li>
-                <li class="nav-item"><a class="nav-link  <%= (page == 'jadwal') ? 'fw-medium active' : null  %>" href="#books">Jadwal</a></li>
-                <li class="nav-item"><a class="nav-link  <%= (page == 'inovasi') ? 'fw-medium active' : null  %>" href="#libraries">Inovasi</a></li>
+                <li class="nav-item"><a class="nav-link <%= (page == 'dashboard') ? 'fw-medium active' : null  %>" aria-current="page" href="/">Beranda</a></li>
+                <li class="nav-item"><a class="nav-link <%= (page == 'reservation') ? 'fw-medium active' : null  %>" href="reservation/list_menu">Reservasi</a></li>
+                <li class="nav-item"><a class="nav-link <%= (page == 'schedule') ? 'fw-medium active' : null  %>" href="#books">Jadwal</a></li>
+                <li class="nav-item"><a class="nav-link <%= (page == 'inovation') ? 'fw-medium active' : null  %>" href="#libraries">Inovasi</a></li>
             </ul>
             <form class="ps-lg-5">
                 <button class="btn btn-lg btn-primary rounded-pill bg-gradient font-base order-0" type="submit">Login</button>

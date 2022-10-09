@@ -1,1 +1,168 @@
-asd
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <%- include('../template/head') %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  </head>
+
+
+  <body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <%- include('../template/nav') %>
+      
+
+      <section id="libraries">
+        <!--/.bg-holder-->
+
+        <div class="container">
+          <div class="row g-xl-0 align-items-center">
+            <div class="col-md-12 col-lg-12 text-center text-md-start offset-lg-12 offset-xxl-0">
+              <h1 class="fw-semi-bold text-warning">Reservasi <span class="text-1100">sekarang!</span></h1>
+              <form action="create" method="post">
+                
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Nama dinas</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="reservation_goverment_service">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Kontak</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="reservation_contact_number">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" name="reservation_email">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Tanggal mulai reservasi</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control" name="reservation_date_start">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Tanggal selesai reservasi</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control" name="reservation_date_finish">
+                  </div>
+                </div>
+
+                <div class="btn-group">
+                  <button class="btn btn-info">Batal</button>
+                  <button class="btn btn-primary" id="save">Simpan</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-0">
+        </div>
+        <!--/.bg-holder-->
+
+        <div class="container">
+          <div class="row flex-center">
+            <div class="col-auto mb-2">
+              <p class="mb-0 fs--1 my-2 text-center">&copy; This template is made with&nbsp;
+                <svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#723182" viewBox="0 0 16 16">
+                  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
+                </svg>&nbsp;by&nbsp;<a href="https://themewagon.com/" target="_blank">ThemeWagon </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+    <!-- ===============================================-->
+    <!--    AJAX insert data-->
+    <!-- ===============================================-->
+    <!-- ===============================================-->
+    <!--    End AJAX insert data-->
+    <!-- ===============================================-->
+
+
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <%- include('../template/javascript') %>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
+
+    <script>
+            
+
+        $(document).ready(function(){
+            $("#next").addClass("disabled");
+            $("#check").change(function(){
+                if($("#check").is(":checked") == true){
+                    $("#next").removeClass("disabled");
+                }else{
+                    $("#next").addClass("disabled");
+                };
+            });
+
+          $("input[name='reservation_date_start']").flatpickr({
+            "locale": "id"
+          });
+
+          $("input[name='reservation_date_finish']").flatpickr({
+            "locale": "id"
+          });
+        })
+    </script>
+
+    <script>
+      function post(){
+        $('#save').on('click', function(){
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+          var yyyy = today.getFullYear();
+          let numb = parseInt($('input["name=reservation_contact_number"]').val());
+          $.ajax({
+          url: 'create',
+          method: 'post',
+          data: {
+            reservation_goverment_service: $('input["name=reservation_goverment_service"]').val(),
+            reservation_contact_number: numb,
+            reservation_email: $('input["name=reservation_email"]').val(),
+            reservation_date_start: $('input["name=reservation_date_start"]').val(),
+            reservation_date_finish: $('input["name=reservation_date_finish"]').val(),
+            createdAt: yyyy+'-'+mm+'-'+dd,
+            updatedAt: yyyy+'-'+mm+'-'+dd
+          },
+          dataType: 'JSON',
+          beforeSend:function(){
+            $('#save').addClass('disabled');
+          },
+          success:function(data){
+            console.log(data);
+          }
+        });
+      });
+    };
+    </script>
+
+  </body>
+
+</html>
