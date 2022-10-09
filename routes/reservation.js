@@ -48,8 +48,7 @@ router.get('/edit/:id', async(req, res)=>{
     }
 });
 
-router.post('/create', async(req, res)=>{    
-    res.send(typeof req.body.reservation_contact_number);
+router.post('/create', async(req, res)=>{
     const schema={
         reservation_goverment_service: "string|max:55",
         reservation_contact_number: "number|integer",
@@ -57,15 +56,24 @@ router.post('/create', async(req, res)=>{
         reservation_date_start: "string",
         reservation_date_finish: "string"
     };
-
-    const validated = v.validate(req.body, schema);
     
-    if(validated.length){
-        return res.status(400).json(validated);
-    }else{
+    const check = v.compile(schema);
+    const checked = check({
+        reservation_goverment_service: req.body.reservation_goverment_service,
+        reservation_contact_number: Number(req.body.reservation_contact_number),
+        reservation_email: req.body.reservation_email,
+        reservation_date_start: req.body.reservation_date_start,
+        reservation_date_finish: req.body.reservation_date_finish,
+    });
+    
+    if(checked){
         await Reservation.create(req.body);
-        res.send(req.body);
-    };
+        req.flash('info', 'Data telah sukses dikirim');
+        res.redirect('/');
+    }else{
+        res.redirect('/reservation');
+        
+    }
 });
 
 router.put('/:id', async(req, res)=>{

@@ -138,13 +138,13 @@
           var dd = String(today.getDate()).padStart(2, '0');
           var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
           var yyyy = today.getFullYear();
-          let numb = parseInt($('input["name=reservation_contact_number"]').val());
+          
           $.ajax({
           url: 'create',
           method: 'post',
           data: {
             reservation_goverment_service: $('input["name=reservation_goverment_service"]').val(),
-            reservation_contact_number: numb,
+            reservation_contact_number: $('input["name=reservation_contact_number"]').val(),
             reservation_email: $('input["name=reservation_email"]').val(),
             reservation_date_start: $('input["name=reservation_date_start"]').val(),
             reservation_date_finish: $('input["name=reservation_date_finish"]').val(),

@@ -3,9 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  const page = "dashboard"; 
+  const page = "dashboard";
+  // const info = req.flash('info');
   res.render('../public/index',{
-    page: page
+    page: page,
+    // info: info
   });
 });
 

@@ -3,11 +3,22 @@
 
   <head>
     <%- include('./template/head') %>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 
 
   <body>
-
+    <% if(typeof info !== 'undefined'){ %>
+      <script>
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      </script>
+    <% } %>
     <!-- ===============================================-->
     <!--    Main Content-->
     <!-- ===============================================-->
@@ -26,7 +37,7 @@
           <div class="row align-items-center min-vh-md-75">
             <div class="col-md-7 col-lg-6 py-6 text-sm-start text-center">
               <h1 class="mt-6 mb-sm-4 display-4 fw-semi-bold lh-sm fs-4 fs-lg-6 fs-xxl-7">Penerimaan Tamu <br class="d-block d-lg-none d-xl-block" />Kota Yogyakarta</h1>
-              <p class="mb-4 fs-1">MANGAYU HAYUNING BAWONO </p>
+              <p class="mb-4 fs-1">MANGAYU HAYUNING BAWONO <%= typeof info !== 'undefined' %></p>
               <div class="pt-3">
                 <form>
                   <div class="input-group w-xl-75 w-xxl-50 d-flex flex-end-center">
