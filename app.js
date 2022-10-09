@@ -8,6 +8,7 @@ const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var scheduleRouter = require('./routes/schedule');
 var reservationRouter = require('./routes/reservation');
 
 var app = express();
@@ -30,5 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/reservation', reservationRouter);
+app.use('/schedule', scheduleRouter);
 
 module.exports = app;

@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.DATE,
             allowNull: false
         },
+        reservation_status:{
+            type: DataTypes.STRING(10),
+            allowNull: false
+        },
         createdAt:{
             type: DataTypes.DATE,
             allowNull: false

@@ -54,7 +54,8 @@ router.post('/create', async(req, res)=>{
         reservation_contact_number: "number|integer",
         reservation_email: "email|max:55",
         reservation_date_start: "string",
-        reservation_date_finish: "string"
+        reservation_date_finish: "string",
+        reservation_status: "string"
     };
     
     const check = v.compile(schema);
@@ -64,6 +65,7 @@ router.post('/create', async(req, res)=>{
         reservation_email: req.body.reservation_email,
         reservation_date_start: req.body.reservation_date_start,
         reservation_date_finish: req.body.reservation_date_finish,
+        reservation_status: req.body.reservation_status
     });
     
     if(checked){

@@ -29,6 +29,7 @@
                   <label class="col-sm-2 col-form-label">Nama dinas</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" name="reservation_goverment_service">
+                    <input type="hidden" class="form-control" name="reservation_status" value="baru">
                   </div>
                 </div>
 
@@ -93,15 +94,6 @@
     <!-- ===============================================-->
 
     <!-- ===============================================-->
-    <!--    AJAX insert data-->
-    <!-- ===============================================-->
-    <!-- ===============================================-->
-    <!--    End AJAX insert data-->
-    <!-- ===============================================-->
-
-
-
-    <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
     <%- include('../template/javascript') %>
@@ -148,6 +140,7 @@
             reservation_email: $('input["name=reservation_email"]').val(),
             reservation_date_start: $('input["name=reservation_date_start"]').val(),
             reservation_date_finish: $('input["name=reservation_date_finish"]').val(),
+            reservation_status: $('input["name=reservation_status"]').val(),
             createdAt: yyyy+'-'+mm+'-'+dd,
             updatedAt: yyyy+'-'+mm+'-'+dd
           },
