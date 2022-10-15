@@ -70,7 +70,8 @@ router.post('/create', async(req, res)=>{
     
     if(checked){
         await Reservation.create(req.body);
-        req.flash('info', 'Data telah sukses dikirim');
+       req.flash('alert', 'Data telah sukses dikirim');
+        
         res.redirect('/');
     }else{
         res.redirect('/reservation');
