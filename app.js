@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var scheduleRouter = require('./routes/schedule');
 var reservationRouter = require('./routes/reservation');
+var adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -32,5 +33,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/reservation', reservationRouter);
 app.use('/schedule', scheduleRouter);
+app.use('/admin', adminRouter);
 
 module.exports = app;
