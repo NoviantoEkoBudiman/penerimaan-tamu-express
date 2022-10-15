@@ -23,6 +23,14 @@ module.exports = {
         type: Sequelize.STRING(55),
         allowNull: false
       },
+      reservation_description:{
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      reservation_destination:{
+        type: Sequelize.INTEGER(3),
+        allowNull: false
+      },
       reservation_date_start:{
         type: Sequelize.DATE,
         allowNull: false
@@ -32,7 +40,7 @@ module.exports = {
         allowNull: false
       },
       reservation_status:{
-        type: Sequelize.STRING(10),
+        type: Sequelize.INTEGER(1),
         allowNull: false
       },
       createdAt:{

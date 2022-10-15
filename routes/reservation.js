@@ -55,7 +55,9 @@ router.post('/create', async(req, res)=>{
         reservation_email: "email|max:55",
         reservation_date_start: "string",
         reservation_date_finish: "string",
-        reservation_status: "string"
+        reservation_status: "string",
+        reservation_description: "string", 
+        reservation_destination: "number"
     };
     
     const check = v.compile(schema);
@@ -65,7 +67,9 @@ router.post('/create', async(req, res)=>{
         reservation_email: req.body.reservation_email,
         reservation_date_start: req.body.reservation_date_start,
         reservation_date_finish: req.body.reservation_date_finish,
-        reservation_status: req.body.reservation_status
+        reservation_status: req.body.reservation_status,
+        reservation_description: req.body.reservation_description,
+        reservation_destination: req.body.reservation_destination
     });
     
     if(checked){
