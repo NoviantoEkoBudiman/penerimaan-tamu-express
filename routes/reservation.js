@@ -3,11 +3,19 @@ const router = express.Router();
 const Validator = require('fastest-validator');
 const v = new Validator();
 const { Reservation } = require('../models');
+const fetch = require('node-fetch');
+const fileUpload = require('express-fileupload');
 
 router.get("/", async(req, res)=>{
+    const response = await fetch("https://webservice.jogjakota.go.id/master/prov");
+    const province = await response.json();
+    let baseUrl = req.baseUrl;
+
     const page = 'reservation';
     res.render('../public/reservation/index',{
-        page: page
+        page: page,
+        province: province,
+        baseUrl: baseUrl
     });
 });
 
@@ -16,6 +24,12 @@ router.get("/reservation", async(req, res)=>{
     res.render('../public/reservation/index',{
         page: page
     });
+});
+
+router.get('/data_district/:id', async(req, res)=>{    
+    await fetch("https://webservice.jogjakota.go.id/master/kab?provId=" + req.params.id)
+        .then((res) => res.json())
+        .then((json) => res.send(json));
 });
 
 router.get('/list_menu', async(req, res)=>{
@@ -49,37 +63,35 @@ router.get('/edit/:id', async(req, res)=>{
 });
 
 router.post('/create', async(req, res)=>{
+    // console.log(req);
     const schema={
         reservation_goverment_service: "string|max:55",
         reservation_contact_number: "number|integer",
         reservation_email: "email|max:55",
         reservation_date_start: "string",
         reservation_date_finish: "string",
-        reservation_status: "string",
         reservation_description: "string", 
-        reservation_destination: "number"
+        reservation_destination: "number|integer"
     };
     
     const check = v.compile(schema);
+
     const checked = check({
         reservation_goverment_service: req.body.reservation_goverment_service,
         reservation_contact_number: Number(req.body.reservation_contact_number),
         reservation_email: req.body.reservation_email,
         reservation_date_start: req.body.reservation_date_start,
         reservation_date_finish: req.body.reservation_date_finish,
-        reservation_status: req.body.reservation_status,
         reservation_description: req.body.reservation_description,
-        reservation_destination: req.body.reservation_destination
+        reservation_destination: Number(req.body.reservation_destination)
     });
     
     if(checked){
         await Reservation.create(req.body);
        req.flash('alert', 'Data telah sukses dikirim');
-        
         res.redirect('/');
     }else{
         res.redirect('/reservation');
-        
     }
 });
 

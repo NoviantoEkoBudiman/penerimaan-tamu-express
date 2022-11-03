@@ -18,6 +18,14 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.STRING(55),
             allowNull: false
         },
+        reservation_description:{
+          type: DataTypes.TEXT,
+          allowNull: false
+        },
+        reservation_destination:{
+          type: DataTypes.INTEGER(3),
+          allowNull: false
+        },
         reservation_date_start:{
             type: DataTypes.DATE,
             allowNull: false
@@ -26,9 +34,15 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.DATE,
             allowNull: false
         },
+        reservation_read_status:{
+            type: DataTypes.STRING(10),
+            allowNull: false,
+            defaultValue: 0
+        },
         reservation_status:{
             type: DataTypes.STRING(10),
-            allowNull: false
+            allowNull: false,
+            defaultValue: 1
         },
         createdAt:{
             type: DataTypes.DATE,

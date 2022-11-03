@@ -1,51 +1,58 @@
 <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link" href="index.html">
-        <i class="menu-icon mdi mdi-select-all"></i>
-        <span class="menu-title">Semua Reservasi</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="a.html">
-        <i class="menu-icon mdi mdi mdi-book "></i>
-        <span class="menu-title">Belum Dibaca</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="b.html">
-        <i class="menu-icon mdi mdi-book-open-page-variant"></i>
-        <span class="menu-title">Sudah Dibaca</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="b.html">
-        <i class="menu-icon mdi mdi mdi-comment-processing"></i>
-        <span class="menu-title">Diproses</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="b.html">
-        <i class="menu-icon mdi mdi-backup-restore "></i>
-        <span class="menu-title">Dikembalikan</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="b.html">
-        <i class="menu-icon mdi mdi-bookmark-check "></i>
-        <span class="menu-title">Sudah Direvisi</span>
-      </a>
-    </li>
-    <li class="nav-item nav-category">Data Beserta Bukti</li>
-    <li class="nav-item">
-      <a class="nav-link" href="b.html">
-        <i class="menu-icon mdi mdi-codepen"></i>
-        <span class="menu-title">Reservasi beserta bukti</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="b.html">
-        <i class="menu-icon mdi mdi mdi-comment-check "></i>
-        <span class="menu-title">Disetujui</span>
-      </a>
-    </li>
+  <li class="nav-item <%= (page == "all") ? "active" : null %>">
+    <a class="nav-link" href="/admin">
+      <i class="menu-icon mdi mdi-select-all"></i>
+      <span class="menu-title">Semua Reservasi</span>
+    </a>
+  </li>
+  <li class="nav-item <%= (page == "unread") ? "active" : null %>">
+    <a class="nav-link" href="unread">
+      <i class="menu-icon mdi mdi mdi-book "></i>
+      <span class="menu-title">Belum Dibaca</span>
+    </a>
+  </li>
+  <li class="nav-item <%= (page == "read") ? "active" : null %>">
+    <a class="nav-link" href="read">
+      <i class="menu-icon mdi mdi-select-all"></i>
+      <span class="menu-title">Sudah Dibaca</span>
+    </a>
+  </li>
+  <li class="nav-item <%= (page == "process") ? "active" : null %>">
+    <a class="nav-link" href="process">
+      <i class="menu-icon mdi mdi mdi-comment-processing"></i>
+      <span class="menu-title">Diproses</span>
+    </a>
+  </li>
+  <li class="nav-item <%= (page == "returned") ? "active" : null %>">
+    <a class="nav-link" href="returned">
+      <i class="menu-icon mdi mdi-backup-restore "></i>
+      <span class="menu-title">Dikembalikan</span>
+    </a>
+  </li>
+  <li class="nav-item <%= (page == "revised") ? "active" : null %>">
+    <a class="nav-link" href="revised">
+      <i class="menu-icon mdi mdi-bookmark-check "></i>
+      <span class="menu-title">Sudah Direvisi</span>
+    </a>
+  </li>
+  <li class="nav-item nav-category">Data Beserta Bukti</li>
+  <li class="nav-item <%= (page == "proof") ? "active" : null %>">
+    <a class="nav-link" href="proof">
+      <i class="menu-icon mdi mdi-codepen"></i>
+      <span class="menu-title">Reservasi beserta bukti</span>
+    </a>
+  </li>
+  <li class="nav-item <%= (page == "approved") ? "active" : null %>">
+    <a class="nav-link" href="b.html">
+      <i class="menu-icon mdi mdi mdi-comment-check "></i>
+      <span class="menu-title">Disetujui</span>
+    </a>
+  </li>
+  <li class="nav-item nav-category">Data Inovasi</li>
+  <li class="nav-item <%= (page == "innovation") ? "active" : null %>">
+    <a class="nav-link" href="inovation">
+      <i class="menu-icon mdi mdi mdi-comment-check "></i>
+      <span class="menu-title">List Inovasi</span>
+    </a>
+  </li>
 </ul>

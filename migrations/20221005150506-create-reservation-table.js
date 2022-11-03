@@ -39,9 +39,15 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
+      reservation_read_status:{
+        type: Sequelize.INTEGER(1),
+        allowNull: false,
+        defaultValue: 0
+      },
       reservation_status:{
         type: Sequelize.INTEGER(1),
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1
       },
       createdAt:{
         type: Sequelize.DATE,

@@ -23,13 +23,17 @@
           <div class="row g-xl-0 align-items-center">
             <div class="col-md-12 col-lg-12 text-center text-md-start offset-lg-12 offset-xxl-0">
               <h1 class="fw-semi-bold text-warning">Reservasi <span class="text-1100">sekarang!</span></h1>
-              <form action="create" method="post">
+              <form action="create" method="post" enctype="multipart/form-data">
                 
+                <br/>
+
+                <span>Data Dinas</span>
+                <hr/>
+
                 <div class="mb-3 row">
                   <label class="col-sm-2 col-form-label">Nama dinas</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" name="reservation_goverment_service">
-                    <input type="hidden" class="form-control" name="reservation_status" value="baru">
                   </div>
                 </div>
 
@@ -48,6 +52,48 @@
                 </div>
 
                 <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Asal Provinsi</label>
+                  <div class="col-sm-10">
+                    <select name="reservation_province" class="form-control">
+                      <option value=""></option>
+                      <% for(i=0;i<province.length;i++){ %>
+                        <option value="<%= province[i].id %>"><%= province[i].name %></option>
+                      <% } %>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mb-3 row invisible" id="district">
+                  <label class="col-sm-2 col-form-label">Kabupaten/Kota</label>
+                  <div class="col-sm-10">
+                    <select name="reservation_district" class="form-control">
+                      
+                    </select>
+                  </div>
+                </div>
+
+                <span>Data Reservasi</span>
+                <hr/>
+
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Deskripsi Reservasi</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="reservation_description">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Tujuan OPD</label>
+                  <div class="col-sm-10">
+                    <select name="reservation_destination" class="form-control">
+                      <option value="1">ABC</option>
+                      <option value="2">DEF</option>
+                      <option value="3">GHI</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
                   <label class="col-sm-2 col-form-label">Tanggal mulai reservasi</label>
                   <div class="col-sm-10">
                     <input type="date" class="form-control" name="reservation_date_start">
@@ -58,6 +104,16 @@
                   <label class="col-sm-2 col-form-label">Tanggal selesai reservasi</label>
                   <div class="col-sm-10">
                     <input type="date" class="form-control" name="reservation_date_finish">
+                  </div>
+                </div>
+
+                <span>Data Surat Permohonan Kunjungan</span>
+                <hr/>
+
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">File</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="reservation_file">
                   </div>
                 </div>
 
@@ -101,8 +157,6 @@
     <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
 
     <script>
-            
-
         $(document).ready(function(){
             $("#next").addClass("disabled");
             $("#check").change(function(){
@@ -112,6 +166,24 @@
                     $("#next").addClass("disabled");
                 };
             });
+
+          $("select[name='reservation_province']").on('change',function(){
+            if($("select[name='reservation_province']").val() != ''){
+              $("#district").removeClass("invisible");
+              let idProvince = $("select[name='reservation_province']").val();
+              $.ajax({
+                url: "/reservation/data_district/"+idProvince,
+                method: 'GET',
+                crossDomain: true,
+                dataType: 'json',
+                success: function(data){
+                  console.log(data);
+                }
+              });
+            }else{
+              $("#district").addClass("invisible");
+            }
+          });
 
           $("input[name='reservation_date_start']").flatpickr({
             "locale": "id"

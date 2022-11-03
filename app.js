@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { flash } = require('express-flash-message');
 const session = require('express-session');
+var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -21,7 +22,12 @@ app.use(session({
     cookie: { secure: false }
 }))
 app.use(flash());
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200,
+}
 
+app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
